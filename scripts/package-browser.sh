@@ -1,7 +1,19 @@
 #!/bin/sh
-# [INPUT]: 仅交付源码的分支，尚无通过安全验收的 macOS/Linux 指纹内核。
-# [OUTPUT]: 即使存在手工放入的引擎，也明确拒绝打包。
-# [POS]: 跨平台构建阻断入口，不品牌化、签名、复制或覆盖任何引擎资源。
+# [INPUT]: 固定 Chromium 引擎、CARGO_TARGET_DIR、品牌化脚本与平台复制工具。
+# [OUTPUT]: macOS 签名 Browser.zip；Linux 源码/Arch 构建树中的完整引擎替换与版本元数据。
+# [POS]: 构建资源入口；避免 Tauri 逐文件复制丢失 Framework 目录链接。
 # [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
-printf '%s\n' 'Browser engine packaging is disabled for this source-only fork. See docs/release-readiness.md.' >&2
-exit 1
+set -eu
+cd "$(dirname "$0")/.."
+if [ "$(uname -s)" = Linux ]; then
+  test -x browser-runtime/LinuxBrowser/chrome || { echo 'Run python3 scripts/fetch-browser.py first' >&2; exit 1; }
+  test "$(cat browser-runtime/LinuxBrowser/version.txt)" = "$(cat browser-runtime/version.txt)" || { echo 'Engine version mismatch' >&2; exit 1; }
+  engine_output="${CARGO_TARGET_DIR:-src-tauri/target}/release/browser-runtime"
+  python3 scripts/package-linux-browser.py browser-runtime/LinuxBrowser "$engine_output"
+  exit 0
+fi
+sh scripts/brand-browser.sh
+/usr/bin/codesign --verify --deep --strict browser-runtime/Browser.app
+/usr/bin/plutil -extract CFBundleShortVersionString raw -o browser-runtime/version.txt browser-runtime/Browser.app/Contents/Info.plist
+rm -f browser-runtime/Browser.zip
+/usr/bin/ditto -c -k --keepParent browser-runtime/Browser.app browser-runtime/Browser.zip

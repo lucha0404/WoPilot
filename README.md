@@ -2,22 +2,24 @@
 
 [简体中文](README.zh-CN.md)
 
-A branded source-code fork of [CCBaga](https://github.com/liseami/CCBaga), based on official `v0.2.50`. Local identity management, recovery, isolated profiles and fingerprint features remain in the source. This is not an official CCBaga release and does not promise protection from account restrictions.
+WoPilot is an unofficial Windows customization of [CCBaga v0.2.50](https://github.com/liseami/CCBaga/releases/tag/v0.2.50), with its own name, artwork and application-data identifier. It retains local identity management, recovery, isolated profiles and fingerprint features. It does not promise protection from account restrictions.
 
-## Source review only
+## Download and install
 
-**No approved WoPilot installer is available. This branch is not ready to install.**
+Open [Releases](https://github.com/lucha0404/WoPilot/releases/latest) and download **WoPilot-0.2.50-windows-x86_64-setup.exe**. Run it on Windows 10 or 11, 64-bit. The installer includes the companion browser. If Microsoft WebView2 is missing, setup downloads its official runtime.
 
-- The old fingerprint engine is not included. Automatic engine downloads and normal packaging are blocked.
-- Fingerprint Chromium 148 and upstream's current 150 binary have no verified mapping to current Chromium security fixes. A version bump or matching checksum does not establish patch coverage.
-- Pika free-icon notices and provenance have been repaired. Cromma UI component redistribution terms still require confirmation; the top-level MIT notice does not settle that question.
-- No maintainer account vault, browser profile, credentials or private backups are included. Private customization commits are not imported; new commits use a GitHub no-reply identity.
+The installer is not Authenticode-signed, so Windows may show an unknown-publisher warning. Verify the GitHub download source and the SHA-256 checksum supplied with the release. Use your own account and network settings after installation. No maintainer profile or credentials are supplied.
 
-Read [release readiness and evidence](docs/release-readiness.md) before building or distributing anything. This fork uses its own application identifier and Windows browser registration namespace, with no automatic migration of existing app data.
+## Known issues
+
+- The bundled fingerprint browser remains **148.0.7778.215**. Coverage of recent Chromium security fixes has not been verified; this release does not fix that upstream limitation.
+- Cromma UI's independent redistribution terms remain unconfirmed. Original MIT and third-party notices are preserved; the top-level MIT license is not a blanket license for every component.
+- Pika free-icon attribution and drawings have been checked and repaired in this source. This does not resolve Cromma UI's component-code terms.
+- Updates are manual through this fork's Releases. The official CCBaga binary updater is disabled to preserve WoPilot customization.
+
+See [release status and evidence](docs/release-readiness.md) and the release notes for the exact build, checks and limitations. The earlier source-only pause has been replaced by an explicitly authorized manual Windows release with these issues disclosed. There is no automatic publishing workflow.
 
 ## Source checks
-
-Install Bun, Node.js and Python, then run:
 
 ```sh
 bun install --frozen-lockfile
@@ -28,10 +30,10 @@ python vendor/cromma-ui/verify-pika-source.py
 python scripts/check-source-privacy.py
 ```
 
-Browser preparation and packaging commands deliberately fail while the release blockers remain. Source checks do not launch Claude, access real account data, install apps or run the old browser. Native platform tests require the relevant platform toolchain and are separate from these checks.
+Windows installers are built and tested in a disposable GitHub runner using the manually triggered `Build Windows installer` workflow. It has read-only repository permissions and uploads only the installer, checksum and public build information for review. Publishing a Release is a separate manual action.
 
-## Updates and attribution
+## Data and attribution
 
-There is no official binary auto-updater in this fork. Future source and engine updates require review and fresh verification; see [maintenance](UPDATE-WOPILOT.md). Never share another person's app-data directory, identity exports, credentials, cookies or proxy configuration.
+This fork uses its own application-data identifier and Windows registration namespace, with no automatic migration of existing CCBaga data. Never share someone else's app-data directory, identity exports, credentials, cookies or proxy configuration. Private customization history is not imported and new commits use a GitHub no-reply identity.
 
-[LICENSE](LICENSE) retains the upstream MIT notice for original project work. [NOTICE.md](NOTICE.md) records separate third-party terms and unresolved provenance. No blanket third-party license claim is made. Upstream history and copyright notices are retained. The [upstream usage guide](docs/usage.md) explains the underlying features rather than promising this branch is installable.
+[LICENSE](LICENSE) retains the upstream MIT notice for original project work. [NOTICE.md](NOTICE.md) records separate third-party terms and unresolved provenance. The [usage guide](docs/usage.md) describes the underlying features. [Maintenance notes](UPDATE-WOPILOT.md) describe future updates.

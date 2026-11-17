@@ -84,6 +84,8 @@ def main():
             verify_browser_ui(pages[0].parent)
             assert any(folder.rglob('browser.ico')),'Missing companion icon'
             assert any(folder.rglob('LICENSE.lobehub.txt')),'Missing icon license'
+            assert any(folder.rglob('LICENSE.pika.txt')),'Missing Pika free-icon license'
+            assert any(folder.rglob('NOTICE.md')),'Missing third-party notices'
             return engine
         def assets():
             assert profile.read_bytes()==b'keep-profile'

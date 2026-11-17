@@ -1,8 +1,10 @@
-# WoPilot 朋友版源码 fork
+# WoPilot 朋友版
 
-当前基线为 CCBaga 官方 v0.2.50。用户已授权创建干净 GitHub fork，并明确选择保留指纹源码、暂不发布安装包。此源码使用独立应用标识和 Windows 注册名称，不迁移现有程序资料。私人本机更新路径、备份和提交历史不进入朋友版。
+基于 CCBaga 官方 v0.2.50，使用独立应用标识和 Windows 注册名称。用户现已明确授权把不含私人资料的安装包上传到 fork 的 Releases，并要求如实说明已知问题；此前的只交源码限制已被本次授权替代。
 
-当前发布状态以 docs/release-readiness.md 为准：旧内核的下载和正常打包停止，上游 release workflow 和旧 Arch 下载配方移除；Cromma UI 组件授权仍待核清，不以 MIT 顶层声明覆盖未知来源。Pika 免费图形来源与许可单独验证。以下内容是继承的上游功能和平台参考，不授予在本 fork 发布安装包或改动真实用户资料的权限。
+保持账号、浏览器资料、网络凭据和私人编译路径不进入源码或安装包。Windows 安装包只能从清洗后的公开提交，在可丢弃 Windows runner 构建和试装后手动发布；不改本机现用程序或个人资料。保留固定摘要的原指纹内核并披露未核清的安全覆盖，不假称升级修复。Cromma UI 独立许可仍未知，Pika 修复已保留。自动发布仍停用。
+
+以下为继承的上游功能和跨平台参考；朋友发行目前只验证 Windows x64，具体已知问题见 docs/release-readiness.md。
 
 # CCBaga - CCBaga-A（宿主，橙底清理员 A）与 CCBaga-B（指纹 Chromium，橙底浏览器 B）
 安装为 /Applications/CCBaga-A.app（io.github.lucha0404.wopilot）与 /Applications/CCBaga-B.app（io.github.lucha0404.wopilot.browser）；稳定包标识与独立资料目录保护钥匙串、设置和浏览器资料。

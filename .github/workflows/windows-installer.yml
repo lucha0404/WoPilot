@@ -1,0 +1,64 @@
+name: Build Windows installer
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-and-verify:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1
+        with:
+          node-version: '22.23.2'
+          package-manager-cache: false
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6
+        with:
+          bun-version: 1.3.5
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0
+        with:
+          python-version: '3.13'
+      - name: Prepare locked tools and source
+        shell: pwsh
+        run: |
+          rustup toolchain install 1.98.1 --profile minimal
+          rustup default 1.98.1
+          bun install --frozen-lockfile
+          python scripts/check-source-privacy.py
+          bun test
+          python scripts/test-fetch-browser.py
+          python vendor/cromma-ui/verify-pika-source.py
+      - uses: Swatinem/rust-cache@d1527c8f67ef9af357290475d4af4b0fab8f12e0
+        with:
+          workspaces: src-tauri -> target
+          shared-key: wopilot-windows-2025
+      - name: Prepare pinned browser
+        run: python scripts/fetch-browser.py
+      - name: Build installer in disposable Windows environment
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $vs = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+          if (-not $vs) { throw 'MSVC build tools missing' }
+          Import-Module "$vs\Common7\Tools\Microsoft.VisualStudio.DevShell.dll"
+          Enter-VsDevShell -VsInstallPath $vs -SkipAutomaticLocation -DevCmdArguments '-arch=x64 -host_arch=x64'
+          $env:RUSTFLAGS = "--remap-path-prefix=$env:GITHUB_WORKSPACE=WoPilot-source"
+          python scripts/release-windows.py build
+      - name: Verify clean install, startup, upgrade and uninstall
+        run: python scripts/release-windows.py verify
+      - name: Record public build provenance
+        shell: pwsh
+        run: |
+          python -c "import json,os,pathlib; p=pathlib.Path('releases/BUILD_INFO.json'); p.write_text(json.dumps({'source_commit':os.environ['GITHUB_SHA'],'repository':os.environ['GITHUB_REPOSITORY'],'run_url':'https://github.com/'+os.environ['GITHUB_REPOSITORY']+'/actions/runs/'+os.environ['GITHUB_RUN_ID'],'application_version':'0.2.50','browser_version':pathlib.Path('browser-runtime/version.txt').read_text().strip(),'architecture':'windows-x86_64','clean_install_verification':'passed','contains_maintainer_profile':False},indent=2)+'\n',encoding='utf-8')"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: WoPilot-windows-installer
+          if-no-files-found: error
+          retention-days: 7
+          path: |
+            releases/WoPilot-0.2.50-windows-x86_64-setup.exe
+            releases/Windows-SHA256SUMS
+            releases/BUILD_INFO.json

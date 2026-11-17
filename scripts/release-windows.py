@@ -41,7 +41,7 @@ def main():
             if result.returncode:failed.append(command[0])
         if failed:raise SystemExit('Windows checks failed: '+', '.join(failed))
         if phase=='check':return
-    run('bun','run','tauri','build','--bundles','nsis','--features','custom-protocol','--config',json.dumps({'version':version}))
+    run('bun','run','tauri','build','--bundles','nsis','--features','custom-protocol','--config',json.dumps({'version':version,'bundle':{'windows':{'nsis':{'compression':'zlib'}}}}))
     installers=list((ROOT/'src-tauri/target/release/bundle/nsis').glob('*-setup.exe'))
     if len(installers)!=1:raise SystemExit('Expected exactly one NSIS installer')
     output=ROOT/'releases';output.mkdir(exist_ok=True)

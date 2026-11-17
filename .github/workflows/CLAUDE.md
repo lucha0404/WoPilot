@@ -1,8 +1,7 @@
 # workflows/
 > L2 | 父级: ../CLAUDE.md
 
-checks.yml: Windows 源码单元测试、前端构建、旧内核下载和打包阻断、Pika 来源和私人文件检查。仅 contents:read，不保留 Git 凭据，不访问 Secrets，不制作或发布安装包。
+checks.yml: Windows 源码/固定来源/隐私文件检查，Ubuntu 底层文件事务回归，不制作发行物。
+windows-installer.yml: 仅 workflow_dispatch，Windows x64 固定引擎准备、无私人数据构建及空白 CI 安装/启动/升级/卸载验证；仅上传安装包、校验摘要和公开构建信息。没有写仓库或自动发布权限。
 
-没有 release 工作流；源码通过不代表浏览器安全或实机安装验收。
-
-Ubuntu 隔离任务仅测试底层文件事务；不使用真实内核，不制作发行物。
+源码检查与安装验收不代表浏览器安全补丁覆盖或第三方授权已完全核清。
