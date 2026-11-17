@@ -1,16 +1,5 @@
-﻿# [INPUT]: Windows Chromium 引擎。
-# [OUTPUT]: 验证 Windows 引擎与版本元数据。
-# [POS]: Windows 构建前置检查，不包含 SSH、资料读取或部署。
+﻿# [INPUT]: 仅交付源码的分支，尚无通过安全验收的 Windows 指纹内核。
+# [OUTPUT]: 即使存在手工放入的引擎，也明确拒绝打包。
+# [POS]: Windows 构建阻断入口，不读取或修改引擎、用户资料及系统设置。
 # [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
-$ErrorActionPreference = "Stop"
-$root = Resolve-Path (Join-Path $PSScriptRoot "..")
-Set-Location $root
-if (-not (Test-Path "browser-runtime\WindowsBrowser\chrome.exe")) {
-    python scripts/fetch-browser.py
-}
-$v1 = (Get-Content "browser-runtime\WindowsBrowser\version.txt").Trim()
-$v2 = (Get-Content "browser-runtime\version.txt").Trim()
-if ($v1 -ne $v2) {
-    throw "Engine version mismatch: $v1 vs $v2"
-}
-Write-Output "Windows browser engine package verified."
+throw 'Browser engine packaging is disabled for this source-only fork. See docs/release-readiness.md.'

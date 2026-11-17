@@ -20,7 +20,7 @@ def sign(path, jit=False):
     if jit:
         args += ['--entitlements', str(JIT)]
     if path.name in ['Chromium', 'CCBrowser']:
-        args += ['--identifier', 'ai.local.requirement-french.browser']
+        args += ['--identifier', 'io.github.lucha0404.wopilot.browser']
     subprocess.run([*args, str(path)], check=True)
 
 

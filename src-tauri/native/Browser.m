@@ -153,7 +153,7 @@ static pid_t profileLockPID(NSString *lock) {
 }
 static ProfileOwnership profileApplicationIdentity(NSString *bundle, NSString *executable) {
     if (!bundle.length || !executable.length) return ProfileOwnershipUnknown;
-    return [@[@"ai.local.requirement-french.browser", @"local.ccbroswer"] containsObject:bundle]
+    return [@[@"io.github.lucha0404.wopilot.browser", @"local.ccbroswer"] containsObject:bundle]
         && [@[@"Chromium", @"CCBrowser"] containsObject:executable] ? ProfileOwnershipOwned : ProfileOwnershipNone;
 }
 // ----- 二次读取须保持 UID/启动时间不变，防止把 PID 复用当成同一浏览器 -----

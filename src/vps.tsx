@@ -1,6 +1,6 @@
 /**
  * [INPUT]: 固定资源入口、服务规格、Claude 核心域名分流诊断、Cromma Tabs/Textarea、双语提示词与原生剪贴板。
- * [OUTPUT]: Laper 满宽细线三步入口与斜纹分隔、Claude 出口四态检测、汇总成功/失败和逐域原因（连接对端不等于出口）、五项 AI 图标分段与双语提示词一键复制。
+ * [OUTPUT]: Laper 满宽细线三步入口与斜纹分隔、Claude 出口四态检测、汇总成功/失败和逐域原因（连接对端不等于出口）；用户打开安装说明后展示五项 AI 与真实 Skill 来源及复制提示词。
  * [POS]: 网络资源与分流诊断；应用不收集密钥或执行远端部署，诊断仅进行只读网络连通性探测。
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
  */
@@ -26,6 +26,7 @@ export function VpsPanel() {
     const {t,locale}=useI18n();
     const [selected,setSelected]=useState('generic'), [copied,setCopied]=useState(''), [error,setError]=useState('');
     const [guide,setGuide]=useState<'dmit'|'webshare'|null>(null);
+    const [showSkill,setShowSkill]=useState(false);
     const [diagnosing,setDiagnosing]=useState(false);
     const [diagnostics,setDiagnostics]=useState<DomainDiagnosis[]|null>(null);
     const [diagnosticsError,setDiagnosticsError]=useState('');
@@ -96,12 +97,15 @@ export function VpsPanel() {
         <div className="landing-section-band" aria-hidden="true"/>
         <section className="skill-install" aria-labelledby="skill-install-title">
             <h2 id="skill-install-title">{t('Skill')}</h2>
+            <Button variant="secondary" onClick={()=>setShowSkill(true)}>{t('查看安装说明')}</Button>
+        </section>
+        <AppDialog open={showSkill} onOpenChange={setShowSkill} title={t('安装 Skill')} footer={<Button variant="secondary" onClick={()=>setShowSkill(false)}>{t('关闭')}</Button>}>
             <Tabs className="coding-tabs" size="small" variant="segmented" value={selected} onValueChange={setSelected} tabs={agents.map(agent=>({value:agent.id,label:<span className="coding-agent"><img src={agent.icon} width={18} height={18} alt=""/>{agent.id==='generic'?t('通用'):agent.name}</span>}))}/>
             <div className="skill-prompt-surface"><div className="skill-prompt-toolbar"><span>{selected==='generic'?t('通用'):agents.find(agent=>agent.id===selected)?.name}</span><span>{locale.toUpperCase()}</span></div>
-                <Textarea id="skill-prompt" aria-labelledby="skill-install-title" readOnly value={prompt} rows={3}/>
+                <Textarea id="skill-prompt" aria-label={t("安装 Skill")} readOnly value={prompt} rows={3}/>
                 <div className="skill-prompt-actions"><Button variant="ink" onClick={()=>void copy()}>{copied===prompt?t('已复制'):t('复制提示词')}</Button></div>
             </div>
-        </section>
+        </AppDialog>
         <AppDialog open={guide!==null} onOpenChange={value=>{if(!value)setGuide(null);}} title={guide==='dmit'?'DMIT':'Webshare'} width={440} footer={<Button variant="ink" onClick={()=>setGuide(null)}>{t('关闭')}</Button>}>
             <dl className="resource-specs">{(guide==='dmit'?[
                 ['系统','Debian 12 / 13'],['地址','IPv4'],['登录','SSH Key · root:22'],['文件','PEM · PPK · PUB'],['密钥选项','Generate SSH Key after order']

@@ -1,0 +1,39 @@
+{
+  "package": "@pikaicons/core-free",
+  "version": "0.1.0",
+  "official_free_icons": "https://pikaicons.com/free-icons",
+  "official_terms": "https://pikaicons.com/license",
+  "archive_url": "https://registry.npmjs.org/@pikaicons/core-free/-/core-free-0.1.0.tgz",
+  "archive_sha256": "8acd8dabe6064d9a36fd58e854828cfbefe2fb3b82922b2013cb94752412cd20",
+  "license": "MIT",
+  "license_file": "LICENSE.pika.txt",
+  "license_scope": "Pika icon drawings only; no license to Cromma UI component code is asserted.",
+  "verified_on": "2026-11-16",
+  "verify_command": "python vendor/cromma-ui/verify-pika-source.py",
+  "icons": {
+    "CheckTickCircle.tsx": "CheckTickCircleIcon",
+    "ClockDefault.tsx": "ClockIcon",
+    "FolderDefault.tsx": "FolderIcon",
+    "Globe.tsx": "GlobeIcon",
+    "HomeDefault.tsx": "HomeIcon",
+    "MapPin.tsx": "MapPinIcon",
+    "Refresh.tsx": "RefreshIcon",
+    "SearchDefault.tsx": "SearchIcon",
+    "Server.tsx": "ServerIcon",
+    "Settings01.tsx": "Settings01Icon",
+    "Share01.tsx": "Share01Icon",
+    "ShieldCheck.tsx": "ShieldCheckIcon",
+    "WindowBrowser.tsx": "SidebarMenuIcon"
+  },
+  "embedded": [
+    {
+      "file": "src/ui/glyphs.tsx",
+      "function": "AtGlyph",
+      "export": "AtMarkIcon"
+    },
+    {
+      "file": "src/ui/nav-button.tsx",
+      "export": "ChevronBigRightIcon"
+    }
+  ]
+}

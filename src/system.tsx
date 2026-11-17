@@ -5,7 +5,7 @@
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
  */
 import { Button, Input, Select, Panel, PanelHeader } from 'cromma-ui';
-import { ClockDefault as ClockIcon, Translate as TranslateIcon, MapPin as MapPinIcon, Refresh as ArrowClockwiseIcon } from 'cromma-ui/pika';
+import { ClockDefault as ClockIcon, Globe as TranslateIcon, MapPin as MapPinIcon, Refresh as ArrowClockwiseIcon } from 'cromma-ui/pika';
 import { useEffect, useRef, useState } from 'react';
 import {useI18n} from "./i18n";
 import { invoke } from '@tauri-apps/api/core';

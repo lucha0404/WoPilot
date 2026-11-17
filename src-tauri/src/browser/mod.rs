@@ -121,7 +121,7 @@ fn root(app: &tauri::AppHandle) -> Result<PathBuf, String> {
         .join("browser"))
 }
 #[cfg(target_os = "macos")]
-pub const BROWSER_ID: &str = "ai.local.requirement-french.browser";
+pub const BROWSER_ID: &str = "io.github.lucha0404.wopilot.browser";
 #[cfg(target_os = "macos")]
 const BROWSER_APP: &str = "CCBaga-B.app";
 #[cfg(target_os = "macos")]
@@ -259,7 +259,7 @@ pub fn forget_start_url(app: &tauri::AppHandle) {
 pub fn companion(app: tauri::AppHandle) {
     std::thread::spawn(move || {
         if let Err(error) = start_companion(&app) {
-            eprintln!("CCBaga-B未随宿主启动：{error}");
+            eprintln!("WoPilot Browser 未随宿主启动：{error}");
         }
     });
 }

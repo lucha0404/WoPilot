@@ -40,3 +40,16 @@ identity-vault/
 identities.sqlite*
 key.bin
 vendor/glib/Cargo.lock
+
+# Private identity exports and diagnostics are never shared.
+*.bagapack
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.har
+private-state*/
+installation-before/
+/browser/
+/backups/
+/screenshots/

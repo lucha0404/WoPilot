@@ -12,7 +12,7 @@ export function verifyBrowser(context:BrowserContext|null,report:Report|null,lin
  const problems:string[]=[];
  if(error)problems.push(error);
  if(report?.error)problems.push(report.error);
- if(!linked&&!busy)problems.push('与 CCBaga-A的连接已断开，请在清理器内重新打开实测页。');
+ if(!linked&&!busy)problems.push('与 WoPilot的连接已断开，请在清理器内重新打开实测页。');
  if(!context?.region&&!busy)problems.push('请先在主应用选择目标地区。');
  if(!report&&!busy&&!error)problems.push('尚未取得完整检测结果。');
  if(context&&report){

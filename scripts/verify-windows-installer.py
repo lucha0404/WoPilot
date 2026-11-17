@@ -46,7 +46,7 @@ def main():
     folder_id=ctypes.create_string_buffer(uuid.UUID('3EB685DB-65F9-4CF6-A03A-E3EF65729F3D').bytes_le)
     address=ctypes.c_void_p()
     assert known(folder_id,0,None,ctypes.byref(address))==0
-    try:data=Path(ctypes.wstring_at(address))/'ai.local.requirement-french'
+    try:data=Path(ctypes.wstring_at(address))/'io.github.lucha0404.wopilot'
     finally:ole.CoTaskMemFree(address)
     if data.exists():raise SystemExit('Refusing to touch pre-existing CCBaga application data')
     with tempfile.TemporaryDirectory(prefix='ccbaga-installer-') as temporary:

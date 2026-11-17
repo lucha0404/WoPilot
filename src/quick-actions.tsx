@@ -21,7 +21,7 @@ export function useQuickActions(onStart:()=>void,onChanged:()=>void,onIdentity:(
   try{if(kind==='cache'){
    const before=await invoke<BrowserState>('browser_read');await invoke('browser_quit');await invoke('browser_clear',{includeSiteData:false,onProgress});if(before.running)await invoke('browser_launch',{onProgress});
    activity.finish(true,before.running?'缓存已清理，登录、书签和密码保留；浏览器已重新启动。':'缓存已清理，登录、书签和密码保留；浏览器保持关闭。');
-  }else if(kind==='fingerprint'){await invoke('browser_rotate',{region});await invoke('browser_launch',{onProgress});activity.finish(true,'CCBaga-B已使用新指纹、地区语言与时区启动，网络跟随 TUN。');}
+  }else if(kind==='fingerprint'){await invoke('browser_rotate',{region});await invoke('browser_launch',{onProgress});activity.finish(true,'WoPilot Browser已使用新指纹、地区语言与时区启动，网络跟随 TUN。');}
   else{const result=await invoke<{message:string}>('system_set_region',{region});activity.finish(true,`时区已核验。${result.message}`);}
   }catch(e){setError(String(e));activity.finish(false,String(e));}finally{gate.current=false;setBusy('');onChanged();}
  }

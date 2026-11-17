@@ -16,8 +16,8 @@ import time
 from urllib.parse import unquote, urlparse
 from browser_ui import verify_browser_ui
 ROOT = Path(__file__).resolve().parent.parent
-APPS = [('CCBaga-A.app', 'ai.local.requirement-french', 'CC清理器.app'),
-        ('CCBaga-B.app', 'ai.local.requirement-french.browser', 'CC浏览器.app')]
+APPS = [('CCBaga-A.app', 'io.github.lucha0404.wopilot', 'CC清理器.app'),
+        ('CCBaga-B.app', 'io.github.lucha0404.wopilot.browser', 'CC浏览器.app')]
 REGISTER = '/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister'
 def run(*args):
     return subprocess.run([str(value) for value in args], check=True, capture_output=True, text=True)

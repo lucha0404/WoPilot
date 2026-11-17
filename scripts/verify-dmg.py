@@ -34,8 +34,8 @@ def main():
             with DSStore.open(str(mount / '.DS_Store'), 'r') as store:
                 if store['.']['icvp']['backgroundType'] != 2:
                     raise SystemExit('Finder image background is not configured')
-            apps = [('CCBaga-A.app', 'ai.local.requirement-french', 'requirement-french'),
-                    ('CCBaga-B.app', 'ai.local.requirement-french.browser', 'CCBrowser')]
+            apps = [('CCBaga-A.app', 'io.github.lucha0404.wopilot', 'requirement-french'),
+                    ('CCBaga-B.app', 'io.github.lucha0404.wopilot.browser', 'CCBrowser')]
             for name, identifier, executable in apps:
                 app = mount / name
                 with (app / 'Contents/Info.plist').open('rb') as stream:

@@ -7,7 +7,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "CCBaga-A",
+        "title": "WoPilot",
         "width": 1040,
         "height": 820,
         "minWidth": 760,
@@ -46,13 +46,6 @@
       "webviewInstallMode": {
         "type": "downloadBootstrapper",
         "silent": true
-      }
-    }
-  },
-  "plugins": {
-    "updater": {
-      "windows": {
-        "installMode": "passive"
       }
     }
   }

@@ -89,11 +89,11 @@ int main(int argc, char **argv) {
             CHECK(profileLockPID(lockValue) == -1);
         CHECK(profileLockPID(@"hyphenated-host-123") == 123);
         CHECK(profileApplicationIdentity(nil, @"Chromium") == ProfileOwnershipUnknown);
-        CHECK(profileApplicationIdentity(@"ai.local.requirement-french.browser", nil) == ProfileOwnershipUnknown);
+        CHECK(profileApplicationIdentity(@"io.github.lucha0404.wopilot.browser", nil) == ProfileOwnershipUnknown);
         CHECK(profileApplicationIdentity(@"", @"Chromium") == ProfileOwnershipUnknown);
-        CHECK(profileApplicationIdentity(@"ai.local.requirement-french.browser", @"Chromium") == ProfileOwnershipOwned);
+        CHECK(profileApplicationIdentity(@"io.github.lucha0404.wopilot.browser", @"Chromium") == ProfileOwnershipOwned);
         CHECK(profileApplicationIdentity(@"org.fixture.other", @"Chromium") == ProfileOwnershipNone);
-        CHECK(profileApplicationIdentity(@"ai.local.requirement-french.browser", @"other") == ProfileOwnershipNone);
+        CHECK(profileApplicationIdentity(@"io.github.lucha0404.wopilot.browser", @"other") == ProfileOwnershipNone);
 
         // ----- 真实进程读取仅限本测试及其已回收子进程；参数仅在内存比较 -----
         CHECK(argc == 2 && strncmp(argv[1], "--user-data-dir=", 16) == 0);

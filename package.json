@@ -1,6 +1,6 @@
 {
   "name": "requirement-french",
-  "version": "0.2.0",
+  "version": "0.2.50",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,8 +16,6 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^2.0.0",
-    "@tauri-apps/plugin-process": "2.4.0",
-    "@tauri-apps/plugin-updater": "2.14.1",
     "clsx": "2.1.1",
     "cromma-ui": "file:./vendor/cromma-ui",
     "motion": "14.0.0",

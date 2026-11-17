@@ -1,11 +1,9 @@
 /**
- * [INPUT]: Pika 图标的本地副本。
+ * [INPUT]: 已逐项核对官方免费包的 Pika 图标本地副本，来源见 ../../PIKA-UPSTREAM.json。
  * [OUTPUT]: 本应用具名使用的 Pika 图标。
  * [POS]: 同源图标的唯一消费入口。
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
  */
-export { default as EraserDefault } from "./icons/EraserDefault";
-export { default as Translate } from "./icons/Translate";
 export { default as ShieldCheck } from "./icons/ShieldCheck";
 export { default as Settings01 } from "./icons/Settings01";
 export { default as Globe } from "./icons/Globe";

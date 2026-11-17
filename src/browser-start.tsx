@@ -15,7 +15,7 @@ import browserLogo from '../assets/browser-logo.jpg';
 import './index.css';
 import './style.css';
 async function api<T>(route: string, body?: unknown): Promise<T> { const response = await fetch(new URL(route, location.href), { signal: AbortSignal.timeout(3000), cache:'no-store', credentials:'omit', redirect:'error', ...(body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {}) }); if (!response.ok)
-    throw new Error("本地核验连接失败，请从CCBaga-A重新打开浏览器。"); return response.json(); }
+    throw new Error("本地核验连接失败，请从WoPilot重新打开浏览器。"); return response.json(); }
 function Start() {
     const {t,locale}=useI18n();
     const [context, setContext] = useState<BrowserContext | null>(null), [report, setReport] = useState<Report | null>(null), [busy, setBusy] = useState(true), [error, setError] = useState(''), [linked, setLinked] = useState(false), [reportedAt, setReportedAt] = useState(0);
@@ -74,7 +74,7 @@ function Start() {
 
     return <div className={`browser-verification-page is-${phase}`} data-verification={phase}>
      <main className="browser-start">
-      <header className="verification-brand"><div><img src={browserLogo} width={28} height={28} alt=""/><strong>CCBaga-B</strong></div><span>Chromium {context?.engine_version||'—'}</span></header>
+      <header className="verification-brand"><div><img src={browserLogo} width={28} height={28} alt=""/><strong>WoPilot Browser</strong></div><span>Chromium {context?.engine_version||'—'}</span></header>
       <section className={`verification-identity${identityReady?' linked':''}`} aria-label={t('浏览器身份')} data-identity={identity?.status||'unknown'}>
        <div className="verification-identity-avatar" aria-hidden="true">{identity?.status==='empty'?'∅':Array.from(identityName)[0]?.toUpperCase()||'?'}</div>
        <div className="verification-identity-account"><span>Claude · {t('本地身份')}</span><h2>{identityName}</h2><div>{identity?.email&&identity.email!==identityName&&<span>{identity.email}</span>}{identity?.organization&&<span>{identity.organization}</span>}</div></div>
@@ -90,7 +90,7 @@ function Start() {
       {checks.length>0&&<section className="verification-results" aria-label={t('逐项检测结果')}>{checks.map(check=><article className={`verification-check ${check.ok==null?'pending':check.ok?'ok':'failed'}`} key={check.label}><header><h2>{t(check.label)}</h2><span aria-label={t(check.ok==null?'尚未核验':check.ok?'检测通过':'检测未通过')}>{check.ok==null?'—':check.ok?'✓':'×'}</span></header><strong>{t(check.actual)}</strong>{!check.ok&&<p>{t('目标：{v0}',{v0:t(check.expected)})}</p>}</article>)}</section>}
       {phase==='checking'&&<div className="verification-loading" role="status">{t('正在读取浏览器与网络…')}</div>}
       {report?.exit&&<section className="verification-network"><div><span>{t('出口 IP')}</span><strong>{report.exit.ip}</strong></div><div><span>{t('国家 / 城市')}</span><strong>{report.exit.country} / {report.exit.city||'—'}</strong></div></section>}
-      <footer className="verification-footer"><span className={linked?'connected':'disconnected'}>{t(linked?'已连接 CCBaga-A':'主应用未连接')}</span><time>{reportedAt?t('结果回传成功 {v0}',{v0:new Date(reportedAt).toLocaleTimeString(locale==='zh'?'zh-CN':'en-US')}):t('等待检测回传')}</time></footer>
+      <footer className="verification-footer"><span className={linked?'connected':'disconnected'}>{t(linked?'已连接 WoPilot':'主应用未连接')}</span><time>{reportedAt?t('结果回传成功 {v0}',{v0:new Date(reportedAt).toLocaleTimeString(locale==='zh'?'zh-CN':'en-US')}):t('等待检测回传')}</time></footer>
      </main>
     </div>;
 

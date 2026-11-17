@@ -1,40 +1,37 @@
-<!--
-[INPUT]: 英文 README 中的产品功能、支持平台、安装入口与使用边界。
-[OUTPUT]: 简明中文项目入口、安装与操作导航，以及返回英文详细文档的链接。
-[POS]: README.md 的中文入口；详细技术说明由现有文档维护。
-[PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
--->
+# WoPilot
 
-# CCBaga
+[English](README.md)
 
-[English](README.md) · **简体中文**
+WoPilot 基于 [CCBaga 官方 v0.2.50](https://github.com/liseami/CCBaga/releases/tag/v0.2.50)，保留本地账号资料管理、失败恢复、独立浏览器资料、指纹及环境检查源码，并使用 WoPilot 名称和图标。它不是 CCBaga 官方发行版，也不承诺账号不会被封。
 
-CCBaga 是面向 macOS、Linux 和 Windows 的本地工具，用于管理 Claude 身份、伴生浏览器指纹与系统环境，并核验实际浏览器环境。**CCBaga-A** 负责本机操作，**CCBaga-B** 是使用独立资料目录的伴生浏览器。
+## 当前只交付源码
 
-**用途声明：**本项目仅供旅居海外人员管理本人的 Claude 身份；禁止违反 Anthropic 官方用户协议的用途。本地设置不会更改服务端记录，也不能保证匿名或账号可用。
+**目前没有通过安全和授权核验的 WoPilot 安装包，请勿把此分支当作开箱即用的浏览器发行版。**
 
-本页提供简明中文导航；完整功能、开发步骤和平台限制见[英文 README](README.md)。应用界面和侧栏的「使用说明」均支持中文，可在侧栏底部切换语言。
+- 指纹功能源码保留。旧浏览器内核不进入仓库，自动下载和正常打包入口已停止。
+- 原先使用的 148 内核，以及指纹项目目前最新的 150 内核，都没有取得覆盖当前 Chromium 安全修复的充分证据。更换版本号或校验摘要不等于漏洞已经修复。
+- 已补免费 Pika 图标授权，删除或替换来源未核实的图形。Cromma UI 组件自身的再分发条款仍需原作者确认，不能用顶层 MIT 声明代替。
+- 不包含维护者的账号保险库、浏览器资料、代理凭据和私人备份。未导入本机定制的私有提交历史，新提交使用 GitHub 隐私邮箱。
 
-## 安装
+证据和恢复发布条件见[发布准备情况](docs/release-readiness.md)。当前交付的是源码分享准备，不是可安装产品。此 fork 使用独立应用标识和 Windows 浏览器注册名称，不自动迁移官方程序的资料。
 
-从 [GitHub Releases](https://github.com/liseami/CCBaga/releases/latest) 下载由项目所有者 **liseami** 发布的官方安装包。
+## 检查源码
 
-- **macOS 12+，Apple Silicon：**下载包含 A、B 两个应用的 DMG，将两者拖入 Applications，然后启动 CCBaga-A。详见 [macOS 安装说明（英文）](README.md#macos)。
-- **Linux x86_64：**提供基于 Ubuntu 22.04（glibc 2.35）的 DEB、RPM、AppImage，以及面向当前 Arch 的 pacman 包，均包含伴生浏览器。依赖与限制见 [Linux 说明](docs/linux.md)。
-- **Windows 10/11 x86_64：**使用包含 A、B 的 NSIS 安装器。安装器未进行 Authenticode 签名，可能出现 SmartScreen 提示或被组织策略阻止。详见 [Windows 说明](docs/windows.md)。
+安装 Bun、Node.js 和 Python 后运行：
 
-## 常用操作
+```sh
+bun install --frozen-lockfile
+bun test
+bun run build
+python scripts/test-fetch-browser.py
+python vendor/cromma-ui/verify-pika-source.py
+python scripts/check-source-privacy.py
+```
 
-- **傻瓜设置：**选择国家或地区后执行所需操作；地区设置不会改变公网 IP。
-- **Claude 身份管理：**保存备份或切换本地身份，并选择保留哪些工作区资料；保存备份不改变当前工作区或浏览器绑定。可用密码加密包在同系统设备间导出/导入保存身份，不迁移网页登录。切换前保存工作；直接删除不可撤销且不会新增备份。
-- **浏览器环境：**仅清缓存保留登录；全清理永久删除当前身份的密码、书签、历史、扩展、设置和站点数据，无备份，需单独确认。换指纹会重启 CCBaga-B；绿色核验仅代表已测项目匹配，不包含独立 DNS/WebRTC 泄漏验证。
-- **电脑环境：**分别调整时区、语言与地区；部分操作需要系统授权、重启或注销。
-- **网络环境：**复制提示词，让本地 AI 工具安装独立的 Network Skill。应用不收集 SSH 密钥或执行服务器部署，远端变更需单独确认。
+浏览器下载和打包命令会明确停止。以上检查不启动 Claude、不读取真实账号、不安装应用，也不运行旧浏览器。原生平台检查需要相应编译工具，不能由上述源码检查代替。
 
-## 详细文档
+## 更新与授权
 
-- [使用速查（英文）](docs/usage.md)与[身份存储和恢复边界](docs/identity-storage.md)
-- [更新说明（英文）](README.md#updates)
-- [开发与检查（英文）](README.md#development)
-- [贡献指南（英文）](CONTRIBUTING.md)
-- [MIT 许可证](LICENSE)与[第三方声明](NOTICE.md)
+此 fork 不使用官方整包自动更新。以后需核对新版、保留定制并重新测试，详见[维护说明](UPDATE-WOPILOT.md)。账号、身份导出、登录资料和网络凭据只能由使用者在自己的电脑上配置，不应放进共享仓库或安装包。
+
+保留原作者的 [MIT 许可证](LICENSE)和[第三方归属说明](NOTICE.md)。MIT 仅覆盖有权按此条款授权的原创内容，未知第三方条款未被重新标成 MIT。[上游使用说明](docs/usage.md)用于理解功能，不代表当前分支已具备安装条件。

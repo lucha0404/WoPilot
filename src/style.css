@@ -1,6 +1,6 @@
 /**
  * [INPUT]: index.css 的系统字体、Cromma UI 控件、Laper 最新 LandingRailLayout/LineworkTokens/HeroDotBackground 几何与 Cromma 控件令牌。
- * [OUTPUT]: 黑白斜纹与点阵壳、细线操作网格、立体身份卡片、文件残留紧凑清单与网络/更新布局；实测页全宽紧凑 2/3/4 列、红/黄/绿背景、检测波纹、单项未知黄标和逐项失败原因，复用斜纹/点阵令牌。
+ * [OUTPUT]: 黑白斜纹与点阵壳、细线操作网格、立体身份卡片、文件残留紧凑清单与网络/版本信息布局；实测页全宽紧凑 2/3/4 列、红/黄/绿背景、检测波纹、单项未知黄标和逐项失败原因，复用斜纹/点阵令牌。
  * [POS]: 应用布局层；信息只分标题、操作和结果，删除装饰文案与重复说明区；按钮边缘、内高光、阴影和悬停效果沿用 Cromma UI。
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
  */
@@ -264,16 +264,12 @@ h3 { margin: 0; font-size: 13px; font-weight: 500; }
 }
 @media(prefers-reduced-motion:reduce) { .spin, .activity-progress.indeterminate > span, .app-dialog-overlay { animation: none; } }
 
-/* ----- 主程序更新：复用侧栏与模态，只展示实际阶段 ----- */
-.update-nav { width: 100%; margin-bottom: 4px; }
+/* ----- 本机定制版：复用侧栏与模态，只读版本信息 ----- */
+.app-info-nav { width: 100%; margin-bottom: 4px; }
 .app-version { display: block; padding: 0 12px 16px; font-size: 11px; color: var(--muted-foreground); }
-.update-versions { display: flex; gap: 40px; margin: 0 0 18px; }
-.update-versions dt { font-size: 12px; color: var(--muted-foreground); }
-.update-versions dd { margin: 6px 0 0; font: 16px ui-monospace, monospace; }
-.update-progress { display: grid; gap: 8px; font-size: 12px; }
-.update-progress progress { width: 100%; accent-color: var(--foreground); }
-.update-notes { margin-top: 18px; font-size: 12px; }
-.update-notes p { margin-top: 12px; white-space: pre-wrap; overflow-wrap: anywhere; user-select: text; line-height: 1.7; }
+.app-info-version { margin: 0 0 18px; }
+.app-info-version dt { font-size: 12px; color: var(--muted-foreground); }
+.app-info-version dd { margin: 6px 0 0; font: 16px ui-monospace, monospace; }
 
 /* ----- Landing：同源斜纹带、7px 点阵与满宽内容面；装饰只归壳和标题 ----- */
 .system-page > .cleanup-title, .cleanup-scroll > .cleanup-title, .identity-page > .cleanup-title {

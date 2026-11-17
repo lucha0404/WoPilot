@@ -1,5 +1,11 @@
+# WoPilot 朋友版源码 fork
+
+当前基线为 CCBaga 官方 v0.2.50。用户已授权创建干净 GitHub fork，并明确选择保留指纹源码、暂不发布安装包。此源码使用独立应用标识和 Windows 注册名称，不迁移现有程序资料。私人本机更新路径、备份和提交历史不进入朋友版。
+
+当前发布状态以 docs/release-readiness.md 为准：旧内核的下载和正常打包停止，上游 release workflow 和旧 Arch 下载配方移除；Cromma UI 组件授权仍待核清，不以 MIT 顶层声明覆盖未知来源。Pika 免费图形来源与许可单独验证。以下内容是继承的上游功能和平台参考，不授予在本 fork 发布安装包或改动真实用户资料的权限。
+
 # CCBaga - CCBaga-A（宿主，橙底清理员 A）与 CCBaga-B（指纹 Chromium，橙底浏览器 B）
-安装为 /Applications/CCBaga-A.app（ai.local.requirement-french）与 /Applications/CCBaga-B.app（ai.local.requirement-french.browser）；稳定包标识与独立资料目录保护钥匙串、设置和浏览器资料。
+安装为 /Applications/CCBaga-A.app（io.github.lucha0404.wopilot）与 /Applications/CCBaga-B.app（io.github.lucha0404.wopilot.browser）；稳定包标识与独立资料目录保护钥匙串、设置和浏览器资料。
 Tauri 2.12.2 + Rust + macOS AppKit/UniformTypeIdentifiers/Accessibility/Security/CoreLocation + SHA-256 + React 19.3.0 + TypeScript 5.9.3 + Cromma UI 本地副本 + Radix UI 1.6.7 + Tailwind CSS 4.3.3 + Motion 14.0.0 + Vite 7.3.7 + YAML 2.9.1（仅构建）
 
 <directory>

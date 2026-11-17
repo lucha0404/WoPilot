@@ -41,7 +41,7 @@ class InstallTests(unittest.TestCase):
             '<link rel="stylesheet" href="./assets/browser.css">')
 
     def test_install_upgrade_preserves_unrelated_user_data(self):
-        data = self.prefix / 'share/ai.local.requirement-french/browser/profile/keep'
+        data = self.prefix / 'share/io.github.lucha0404.wopilot/browser/profile/keep'
         data.parent.mkdir(parents=True)
         data.write_text('personal')
         installer.install(self.build, self.prefix)

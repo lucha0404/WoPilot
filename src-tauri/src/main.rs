@@ -1,5 +1,5 @@
-// [INPUT]: 跨平台原生边界、Tauri 生命周期/custom-protocol、身份/清理/浏览器/系统命令与官方签名更新、重启、Rust 原生文件选择插件。
-// [OUTPUT]: CCBaga-A 窗口/托盘、身份与一次性文件选择迁移命令；文件路径留在原生状态，不开放通用 WebView 文件能力。
+// [INPUT]: 跨平台原生边界、Tauri 生命周期/custom-protocol、身份/清理/浏览器/系统命令与 Rust 原生文件选择插件。
+// [OUTPUT]: WoPilot 窗口/托盘、身份与一次性文件选择迁移命令；文件路径留在原生状态，不开放通用 WebView 文件能力。
 // [POS]: 应用编排层；不注册翻译快捷键，不读取翻译设置或 API 密钥。
 // [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 #![cfg_attr(all(windows, not(debug_assertions)), windows_subsystem = "windows")]
@@ -18,8 +18,6 @@ mod progress;
 mod regions;
 mod system;
 mod ui_language;
-#[cfg(test)]
-mod updater_tests;
 #[cfg(target_os = "windows")]
 mod windows;
 use tauri::{tray::TrayIconBuilder, Manager};
@@ -76,8 +74,6 @@ pub(crate) fn startup_trace(stage: &str) {
 fn main() {
     startup_trace("host entry");
     tauri::Builder::default()
-        .plugin(tauri_plugin_updater::Builder::new().build())
-        .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_single_instance::init(|app, args, _| {
             #[cfg(target_os = "linux")]
@@ -112,7 +108,7 @@ fn main() {
             TrayIconBuilder::with_id("main")
                 .icon(app.default_window_icon().unwrap().clone())
                 .menu(&menu)
-                .tooltip("CC")
+                .tooltip("WoPilot")
                 .on_menu_event(|app, event| match event.id().as_ref() {
                     "open" => show(app),
                     "quit" => app.exit(0),
@@ -173,7 +169,7 @@ fn main() {
             network_links::network_diagnose_domains
         ])
         .build(tauri::generate_context!())
-        .expect("无法启动 CCBaga-A")
+        .expect("无法启动 WoPilot")
         .run(|app, event| match event {
             #[cfg(target_os = "macos")]
             tauri::RunEvent::Reopen { .. } => show(app),

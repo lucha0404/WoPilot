@@ -1,6 +1,6 @@
 /**
  * [INPUT]: 依赖 .cn 的 cn。
- * [OUTPUT]: 提供 对内提供线框字形（CheckGlyph、MinusGlyph、Chevron*Glyph、CopyGlyph、Eye*Glyph、PlayGlyph、PauseGlyph、DotGlyph、SearchGlyph、CloseGlyph、ClockGlyph、AtGlyph、PlusGlyph、MicGlyph、ArrowUpGlyph），不进包入口。
+ * [OUTPUT]: 提供 对内提供线框字形（CheckGlyph、MinusGlyph、Chevron*Glyph、CopyGlyph、Eye*Glyph、PlayGlyph、PauseGlyph、DotGlyph、SearchGlyph、CloseGlyph、ClockGlyph、AtGlyph、PlusGlyph、ArrowUpGlyph），不进包入口。
  * [POS]: cromma-ui的内部零件——新原语共用这一份 16 视口的 SVG，不引图标库、不进消费方。
  * [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
  */
@@ -137,15 +137,6 @@ export function PlusGlyph({ className }: GlyphProps) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className={cn(svg, 'size-4', className)}>
       <path d="M8 3v10M3 8h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-/** Pika mic-microphone（24 视口，与壳语义层的 Mic 同一枚）：对话输入胶囊的听写钮 */
-export function MicGlyph({ className }: GlyphProps) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={cn(svg, 'size-4', className)}>
-      <path d="M16.655 11.561a4.28 4.28 0 1 0-4.216-4.218m.002-.022 4.238 4.238-9.908 8.865a2.263 2.263 0 0 1-3.195-3.195z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

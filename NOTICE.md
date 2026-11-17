@@ -18,6 +18,8 @@ The browser bundle contains Chromium and additional dependencies with their own 
 
 `vendor/cromma-ui` is a local copy of Cromma UI, including its Pika icon subset. The copied tree does not currently contain an independent upstream license notice. Confirm its redistribution terms and restore any required notices before publishing these components. The top-level MIT declaration is not evidence of permission from other copyright holders.
 
+The Pika icon paths retained in this fork have been individually matched to the official MIT-licensed `@pikaicons/core-free` package, version `0.1.0`. Its complete notice is retained in [LICENSE.pika.txt](vendor/cromma-ui/LICENSE.pika.txt); the fixed source and verification command are recorded in [PIKA-UPSTREAM.json](vendor/cromma-ui/PIKA-UPSTREAM.json). These icon terms do not license Cromma UI's component code.
+
 ## GLib GTK3 compatibility backport
 
 `vendor/glib` retains the complete crates.io `glib 0.18.5` source distribution and its [MIT license](vendor/glib/LICENSE). The only code change is the official [VariantStrIter mutability fix](https://github.com/gtk-rs/gtk-rs-core/commit/b5a4071e439bef2b5eea76c3aa25e5ae84839e34). The package version is unchanged; `UPSTREAM.json` and the backport regression record its exact source and allowed differences. Linux binaries include this license in their resources.

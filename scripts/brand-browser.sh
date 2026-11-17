@@ -14,7 +14,7 @@ name=CCBaga-B
   -o "${app}/Contents/MacOS/CCBrowser" "${root}/browser-runtime/launcher/CCBrowser.c"
 cp "${root}/browser-runtime/icons/app.icns" "${app}/Contents/Resources/app.icns"
 
-/usr/bin/plutil -replace CFBundleIdentifier -string ai.local.requirement-french.browser "$plist"
+/usr/bin/plutil -replace CFBundleIdentifier -string io.github.lucha0404.wopilot.browser "$plist"
 /usr/bin/plutil -replace CFBundleExecutable -string CCBrowser "$plist"
 /usr/bin/plutil -replace CFBundleName -string "$name" "$plist"
 /usr/bin/plutil -replace CFBundleDisplayName -string "$name" "$plist"

@@ -21,7 +21,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-#define HOST_ID "ai.local.requirement-french"
+#define HOST_ID "io.github.lucha0404.wopilot"
 #define HOST_SUFFIX ".app/Contents/MacOS/requirement-french"
 
 static int host_running(void) {
